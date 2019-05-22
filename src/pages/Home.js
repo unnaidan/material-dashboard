@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import { Dashboard } from './../layouts'
+import { BaseTable } from './../components'
 
 const styles = theme => ({
     //
@@ -11,16 +12,33 @@ class Home extends Component {
         super(props)
 
         this.state = {
-            title: 'Нүүр'
+            title: 'Нүүр',
+            columns: [
+                {
+                    name: 'name',
+                    title: 'Нэр'
+                },
+                {
+                    name: 'email',
+                    title: 'И-мэйл хаяг',
+                },
+                {
+                    name: 'phoneNumber',
+                    title: 'Утасны дугаар'
+                }
+            ]
         }
     }
 
     render() {
-        const { title } = this.state
+        const {
+            title,
+            columns
+        } = this.state
 
         return (
             <Dashboard title={title}>
-                Home
+                <BaseTable columns={columns} />
             </Dashboard>
         )
     }
