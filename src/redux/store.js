@@ -4,11 +4,13 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import {
     SET_AUTH,
+    SET_SELECTION,
     REMOVE_AUTH
 } from './actionTypes'
 
 const state = {
-    auth: false
+    auth: false,
+    selection: []
 }
 
 const mutations = {
@@ -25,6 +27,11 @@ const mutations = {
                 user,
                 token
             }
+        }
+    },
+    [SET_SELECTION](state, { selection }) {
+        return {
+            ...state, selection
         }
     }
 }
