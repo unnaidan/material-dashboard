@@ -30,8 +30,11 @@ const mutations = {
 }
 
 const config = {
+    storage,
     key: 'redux',
-    storage
+    whitelist: [
+        'auth'
+    ]
 }
 
 const persistedReducer = persistReducer(config, createReducer(

@@ -54,25 +54,6 @@ const tableMessages = {
     noData: 'Дата байхгүй'
 }
 
-const Cell = ({ classes, ...restProps }) => (
-    <TableHeaderRow.Cell
-        {...restProps}
-        style={{
-            fontSize: 14
-        }}
-    />
-)
-
-const TableCell = ({ classes, ...restProps }) => (
-    <Table.Cell
-        {...restProps}
-        style={{
-            fontSize: 14,
-            fontWeight: 300
-        }}
-    />
-)
-
 class BaseTable extends Component {
     constructor(props) {
         super(props)
@@ -179,6 +160,25 @@ class BaseTable extends Component {
         } = this.state
         const { classes, columns } = this.props
 
+        const HeaderCell = props => (
+            <TableHeaderRow.Cell
+                {...props}
+                style={{
+                    fontSize: 14
+                }}
+            />
+        )
+
+        const BodyCell = props => (
+            <Table.Cell
+                {...props}
+                style={{
+                    fontSize: 14,
+                    fontWeight: 300
+                }}
+            />
+        )
+
         const SearchBar = (
             <div style={{
                 position: 'relative'
@@ -231,10 +231,10 @@ class BaseTable extends Component {
                     <PagingPanel />
                     <Table
                         messages={tableMessages}
-                        cellComponent={TableCell}
+                        cellComponent={BodyCell}
                     />
                     <TableHeaderRow
-                        cellComponent={Cell}
+                        cellComponent={HeaderCell}
                         showSortingControls
                     />
                     <TableSelection showSelectAll />
