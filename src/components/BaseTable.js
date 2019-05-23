@@ -2,19 +2,20 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import {
     Divider,
+    LinearProgress,
     InputBase,
     Paper
 } from '@material-ui/core'
 import { Search as SearchIcon } from '@material-ui/icons'
 import {
-    PagingState,
     SearchState,
     SortingState,
     SelectionState,
-    IntegratedPaging,
+    PagingState,
     IntegratedSorting,
     IntegratedSelection,
-    IntegratedFiltering
+    IntegratedFiltering,
+    CustomPaging,
 } from '@devexpress/dx-react-grid'
 import {
     Grid,
@@ -23,6 +24,7 @@ import {
     TableSelection,
     PagingPanel
 } from '@devexpress/dx-react-grid-material-ui'
+import axios from './../plugins/axios'
 
 const styles = theme => ({
     paper: {
@@ -50,6 +52,10 @@ const styles = theme => ({
     }
 })
 
+const tableMessages = {
+    noData: 'Дата байхгүй'
+}
+
 const Cell = ({ classes, ...restProps }) => (
     <TableHeaderRow.Cell
         {...restProps}
@@ -74,33 +80,106 @@ class BaseTable extends Component {
         super(props)
 
         this.state = {
-            items: [{
-                name: 'Найдан',
-                email: 'byambanaidan@gmail.com',
-                phoneNumber: 89376060
-            }, {
-                name: 'Алтанзул',
-                email: 'byambanaidan@gmail.com',
-                phoneNumber: 89376060
-            }],
+            items: [],
             selection: [],
-            search: ''
+            search: '',
+            fetching: false,
+            sortBy: 'created',
+            sortOrder: 'desc',
+            page: 1,
+            rowsPerPage: 30,
+            total: 0
         }
+
+        this.sort = this.sort.bind(this)
     }
 
-    handleChange = e => {
-        this.setState({
-            search: e.target.value
-        })
+    componentDidMount() {
+        this.fetchData()
     }
 
     select = selection => this.setState({ selection })
+
+    handleSearch = e => {
+        this.setState({
+            search: e.target.value
+        }, () => {
+            this.fetchData()
+        })
+    }
+
+    sort = sorting => {
+        const {
+            direction,
+            columnName
+        } = sorting.shift()
+
+        this.setState({
+            sortBy: columnName,
+            sortOrder: direction
+        }, () => {
+            this.fetchData()
+        })
+    }
+
+    paginate = page => {
+        this.setState({
+            page: page + 1
+        }, () => {
+            this.fetchData()
+        })
+    }
+
+    fetchData = async () => {
+        this.setState({
+            fetching: true
+        })
+
+        const {
+            sortBy,
+            sortOrder,
+            search,
+            page,
+            rowsPerPage
+        } = this.state
+
+        try {
+            const {
+                total,
+                currentPage,
+                data
+            } = await axios.get('users', {
+                params: {
+                    sortBy,
+                    sortOrder,
+                    search,
+                    page: page,
+                    rowsPerPage
+                }
+            })
+
+            this.setState({
+                items: data,
+                fetching: false,
+                page: currentPage,
+                total
+            })
+        } catch (e) {
+            //
+        }
+    }
 
     render() {
         const {
             items,
             selection,
-            search
+            search,
+            fetching,
+            sortBy,
+            sortOrder,
+            page,
+            rowsPerPage,
+            total
         } = this.state
         const { classes, columns } = this.props
 
@@ -117,7 +196,7 @@ class BaseTable extends Component {
                         input: classes.input
                     }}
                     value={search}
-                    onChange={this.handleChange}
+                    onChange={this.handleSearch}
                     type="search"
                     placeholder="Хайх утга оруулна уу"
                     fullWidth
@@ -132,31 +211,39 @@ class BaseTable extends Component {
             >
                 {SearchBar}
                 <Divider />
+                {fetching && <LinearProgress />}
                 <Grid
                     rows={items}
                     columns={columns}
                 >
                     <SearchState value={search} />
                     <IntegratedFiltering />
-                    <SortingState defaultSorting={[{ columnName: 'name', direction: 'desc' }]} />
+                    <SortingState
+                        sorting={[{ columnName: sortBy, direction: sortOrder }]}
+                        onSortingChange={this.sort}
+                    />
                     <IntegratedSorting />
                     <PagingState
-                        defaultCurrentPage={0}
-                        pageSize={30}
+                        currentPage={page - 1}
+                        onCurrentPageChange={this.paginate}
+                        pageSize={rowsPerPage}
                     />
+                    <CustomPaging totalCount={total} />
                     <SelectionState
                         selection={selection}
                         onSelectionChange={this.select}
                     />
-                    <IntegratedPaging />
                     <IntegratedSelection />
-                    <Table cellComponent={TableCell} />
+                    <PagingPanel />
+                    <Table
+                        messages={tableMessages}
+                        cellComponent={TableCell}
+                    />
                     <TableHeaderRow
                         cellComponent={Cell}
                         showSortingControls
                     />
                     <TableSelection showSelectAll />
-                    <PagingPanel />
                 </Grid>
             </Paper>
         )
