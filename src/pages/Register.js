@@ -44,6 +44,7 @@ class Register extends Component {
         super(props)
 
         this.state = {
+            name: '',
             email: '',
             password: '',
             passwordConfirm: '',
@@ -75,6 +76,7 @@ class Register extends Component {
         })
 
         const {
+            name,
             email,
             password,
             passwordConfirm
@@ -82,12 +84,14 @@ class Register extends Component {
 
         try {
             await axios.post('register', {
+                name,
                 email,
                 password,
                 passwordConfirm
             })
 
             this.setState({
+                name: '',
                 email: '',
                 password: '',
                 passwordConfirm: '',
@@ -104,6 +108,7 @@ class Register extends Component {
     render() {
         const { classes } = this.props
         const {
+            name,
             email,
             password,
             passwordConfirm,
@@ -147,13 +152,21 @@ class Register extends Component {
                             noValidate
                         >
                             <TextField
+                                label="Нэр"
+                                value={name}
+                                onChange={this.handleChange('name')}
+                                variant="outlined"
+                                margin="normal"
+                                fullWidth
+                                autoFocus
+                            />
+                            <TextField
                                 label="И-мэйл хаяг"
                                 value={email}
                                 onChange={this.handleChange('email')}
                                 variant="outlined"
                                 margin="normal"
                                 fullWidth
-                                autoFocus
                             />
                             <TextField
                                 label="Нууц үг"
