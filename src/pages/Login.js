@@ -140,6 +140,7 @@ class Login extends Component {
                                 label="И-мэйл хаяг"
                                 value={email}
                                 onChange={this.handleChange('email')}
+                                type="email"
                                 variant="outlined"
                                 margin="normal"
                                 fullWidth

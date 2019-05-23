@@ -90,8 +90,6 @@ class BaseTable extends Component {
             rowsPerPage: 30,
             total: 0
         }
-
-        this.sort = this.sort.bind(this)
     }
 
     componentDidMount() {
