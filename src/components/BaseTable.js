@@ -12,9 +12,7 @@ import {
     SortingState,
     SelectionState,
     PagingState,
-    IntegratedSorting,
     IntegratedSelection,
-    IntegratedFiltering,
     CustomPaging,
 } from '@devexpress/dx-react-grid'
 import {
@@ -215,12 +213,10 @@ class BaseTable extends Component {
                     columns={columns}
                 >
                     <SearchState value={search} />
-                    <IntegratedFiltering />
                     <SortingState
                         sorting={[{ columnName: sortBy, direction: sortOrder }]}
                         onSortingChange={this.sort}
                     />
-                    <IntegratedSorting />
                     <PagingState
                         currentPage={page - 1}
                         onCurrentPageChange={this.paginate}

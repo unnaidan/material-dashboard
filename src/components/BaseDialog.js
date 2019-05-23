@@ -7,7 +7,6 @@ import {
     Dialog,
     DialogActions,
     DialogContent,
-    DialogContentText,
     DialogTitle,
     Typography
 } from '@material-ui/core'
@@ -45,8 +44,8 @@ class BaseDialog extends Component {
         const {
             open,
             title,
+            fields,
             classes,
-            children,
             onClose,
             onSubmit
         } = this.props
@@ -72,9 +71,7 @@ class BaseDialog extends Component {
                     </Typography>
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        {children}
-                    </DialogContentText>
+                    {fields}
                 </DialogContent>
                 <DialogActions>
                     <Button
