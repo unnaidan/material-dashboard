@@ -8,7 +8,7 @@ import {
     TextField,
     Fab
 } from '@material-ui/core'
-import { ArrowForward as ArrowForwardIcon } from '@material-ui/icons'
+import { ArrowRight } from 'mdi-material-ui'
 import axios from './../plugins/axios'
 import { App } from './../layouts'
 
@@ -194,7 +194,7 @@ class Register extends Component {
                                 type="submit"
                             >
                                 Бүртгүүлэх
-                                <ArrowForwardIcon className={classes.extendedIcon} />
+                                <ArrowRight className={classes.extendedIcon} />
                             </Fab>
                         </form>
                     </Grid>

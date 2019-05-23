@@ -4,8 +4,8 @@ import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
 import {
     Menu as MenuIcon,
-    Person as PersonIcon
-} from '@material-ui/icons'
+    Account
+} from 'mdi-material-ui'
 import {
     Hidden,
     Typography,
@@ -139,7 +139,7 @@ class MainBar extends Component {
                         onClick={this.openMenu}
                         className={classes.menuButton}
                     >
-                        <PersonIcon />
+                        <Account />
                     </IconButton>
                     <Menu
                         id="menu-appbar"

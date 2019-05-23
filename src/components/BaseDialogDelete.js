@@ -11,7 +11,7 @@ import {
     DialogTitle,
     Typography
 } from '@material-ui/core'
-import { Delete as DeleteIcon } from '@material-ui/icons'
+import { Delete } from 'mdi-material-ui'
 
 const styles = theme => ({
     title: {
@@ -53,14 +53,15 @@ class BaseDialogDelete extends Component {
             <Dialog
                 open={open}
                 onClose={onClose}
-                fullWidth={true}
+                maxWidth="xs"
+                fullWidth
             >
                 <DialogTitle
                     className={classes.title}
                     disableTypography
                 >
                     <Avatar className={classes.avatar}>
-                        <DeleteIcon className={classes.icon} />
+                        <Delete className={classes.icon} />
                     </Avatar>
                     <Typography
                         variant="h6"

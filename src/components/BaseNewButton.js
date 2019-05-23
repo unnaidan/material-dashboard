@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core'
-import { Add as AddIcon } from '@material-ui/icons'
+import { Plus } from 'mdi-material-ui'
 
 const styles = theme => ({
-    button: {
-        marginBottom: theme.spacing.unit * 3
-    },
     icon: {
-        marginRight: theme.spacing.unit
+        marginRight: theme.spacing.unit * 2
     }
 })
 
@@ -23,7 +20,7 @@ class BaseNewButton extends Component {
                 color="primary"
                 variant="contained"
             >
-                <AddIcon className={classes.icon} />
+                <Plus className={classes.icon} />
                 Шинэ
             </Button>
         )

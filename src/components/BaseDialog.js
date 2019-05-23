@@ -10,7 +10,7 @@ import {
     DialogTitle,
     Typography
 } from '@material-ui/core'
-import { Create as CreateIcon } from '@material-ui/icons'
+import { Pencil } from 'mdi-material-ui'
 
 const styles = theme => ({
     title: {
@@ -54,14 +54,14 @@ class BaseDialog extends Component {
             <Dialog
                 open={open}
                 onClose={onClose}
-                fullWidth={true}
+                fullWidth
             >
                 <DialogTitle
                     className={classes.title}
                     disableTypography
                 >
                     <Avatar className={classes.avatar}>
-                        <CreateIcon className={classes.icon} />
+                        <Pencil className={classes.icon} />
                     </Avatar>
                     <Typography
                         variant="h6"

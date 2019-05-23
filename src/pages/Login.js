@@ -8,7 +8,7 @@ import {
     TextField,
     Fab
 } from '@material-ui/core'
-import { ArrowForward as ArrowForwardIcon } from '@material-ui/icons'
+import { ArrowRight } from 'mdi-material-ui'
 import axios from './../plugins/axios'
 import { user } from './../redux/getters'
 import { setAuth } from './../redux/actions'
@@ -162,7 +162,7 @@ class Login extends Component {
                                 type="submit"
                             >
                                 Нэвтрэх
-                                <ArrowForwardIcon className={classes.extendedIcon} />
+                                <ArrowRight className={classes.extendedIcon} />
                             </Fab>
                         </form>
                     </Grid>

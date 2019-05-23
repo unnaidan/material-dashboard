@@ -10,9 +10,9 @@ import {
     ListItemText
 } from '@material-ui/core'
 import {
-    Home as HomeIcon,
-    Person as PersonIcon
-} from '@material-ui/icons'
+    Home,
+    Account
+} from 'mdi-material-ui'
 import { ThemeContext } from './../theme/context'
 
 const drawerWidth = 260
@@ -80,12 +80,12 @@ class MainDrawer extends Component {
                 {
                     to: '/',
                     label: 'Нүүр',
-                    icon: <HomeIcon />
+                    icon: <Home />
                 },
                 {
                     to: '/users',
                     label: 'Хэрэглэгч',
-                    icon: <PersonIcon />
+                    icon: <Account />
                 }
             ]
         }

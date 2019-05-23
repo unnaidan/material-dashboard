@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import {
     Divider,
@@ -6,7 +7,7 @@ import {
     InputBase,
     Paper
 } from '@material-ui/core'
-import { Search as SearchIcon } from '@material-ui/icons'
+import { Magnify } from 'mdi-material-ui'
 import {
     SearchState,
     SortingState,
@@ -23,6 +24,7 @@ import {
     PagingPanel
 } from '@devexpress/dx-react-grid-material-ui'
 import axios from './../plugins/axios'
+import { setSelection } from './../redux/actions'
 
 const styles = theme => ({
     paper: {
@@ -75,7 +77,10 @@ class BaseTable extends Component {
         this.fetchData()
     }
 
-    select = selection => this.setState({ selection })
+    select = selection => {
+        // this.props.setSelection(selection)
+        this.setState({ selection })
+    }
 
     handleSearch = e => {
         this.setState({
@@ -158,7 +163,7 @@ class BaseTable extends Component {
             rowsPerPage,
             total
         } = this.state
-        const { classes, columns } = this.props
+        const { columns, classes } = this.props
 
         const HeaderCell = props => (
             <TableHeaderRow.Cell
@@ -184,7 +189,7 @@ class BaseTable extends Component {
                 position: 'relative'
             }}>
                 <div className={classes.search}>
-                    <SearchIcon />
+                    <Magnify />
                 </div>
                 <InputBase
                     classes={{
@@ -244,4 +249,13 @@ class BaseTable extends Component {
     }
 }
 
-export default withStyles(styles)(BaseTable)
+const mapDispatchToProps = {
+    setSelection
+}
+
+const component = withStyles(styles)(BaseTable)
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(component)
