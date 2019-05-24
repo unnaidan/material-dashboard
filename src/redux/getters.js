@@ -1,5 +1,16 @@
-const user = store => store.auth.user
-const token = store => store.auth.token
+import { store } from './store'
+
+const user = () => {
+    const { auth } = store.getState()
+
+    return auth.user
+}
+
+const token = () => {
+    const { auth } = store.getState()
+
+    return auth.token
+}
 
 export {
     user,

@@ -47,8 +47,8 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    user: user(state)
+const mapStateToProps = () => ({
+    user: user()
 })
 
 const component = withStyles(styles)(App)

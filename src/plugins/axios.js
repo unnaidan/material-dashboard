@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { store } from './../redux/store'
 import { token } from './../redux/getters'
 
 const instance = axios.create({
@@ -8,8 +7,7 @@ const instance = axios.create({
 })
 
 instance.interceptors.request.use(config => {
-    const state = store.getState()
-    config.headers.Authorization = `Bearer ${token(state)}`
+    config.headers.Authorization = `Bearer ${token()}`
 
     return config
 })

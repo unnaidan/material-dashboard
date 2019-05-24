@@ -15,7 +15,6 @@ import {
     Menu,
     MenuItem
 } from '@material-ui/core'
-import { user } from './../redux/getters'
 import { removeAuth } from './../redux/actions'
 import { ThemeContext } from './../theme/context'
 
@@ -89,7 +88,6 @@ class MainBar extends Component {
             toggleMobileDrawer
         } = this.context
         const {
-            user,
             removeAuth,
             classes,
             title
@@ -168,10 +166,6 @@ class MainBar extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    user: user(state)
-})
-
 const mapDispatchToProps = {
     removeAuth
 }
@@ -179,6 +173,6 @@ const mapDispatchToProps = {
 const component = withStyles(styles)(MainBar)
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(component)

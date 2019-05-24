@@ -10,7 +10,6 @@ import {
 } from '@material-ui/core'
 import { ArrowRight } from 'mdi-material-ui'
 import axios from './../plugins/axios'
-import { user } from './../redux/getters'
 import { setAuth } from './../redux/actions'
 import { App } from './../layouts'
 
@@ -172,10 +171,6 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    user: user(state)
-})
-
 const mapDispatchToProps = {
     setAuth
 }
@@ -183,6 +178,6 @@ const mapDispatchToProps = {
 const component = withStyles(styles)(Login)
 
 export default connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(component)

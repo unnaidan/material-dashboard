@@ -16,7 +16,6 @@ class BaseNewButton extends Component {
         return (
             <Button
                 {...restProps}
-                className={classes.button}
                 color="primary"
                 variant="contained"
             >
