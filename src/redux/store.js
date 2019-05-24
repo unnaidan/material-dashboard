@@ -8,6 +8,11 @@ import {
     REMOVE_AUTH
 } from './actionTypes'
 
+const setState = (state, newValue) => ({
+    ...state,
+    newValue
+})
+
 const state = {
     auth: false,
     selection: []
@@ -15,24 +20,26 @@ const state = {
 
 const mutations = {
     [REMOVE_AUTH](state) {
-        return {
-            ...state, auth: false
-        }
+        return setState(state, {
+            auth: false
+        })
     },
     [SET_AUTH](state, { payload }) {
         const { user, token } = payload
 
-        return {
-            ...state, auth: {
+        return setState(state, {
+            auth: {
                 user,
                 token
             }
-        }
+        })
     },
-    [SET_SELECTION](state, { selection }) {
-        return {
-            ...state, selection
-        }
+    [SET_SELECTION](state, action) {
+        const { selection } = action
+
+        return setState(state, {
+            selection
+        })
     }
 }
 
