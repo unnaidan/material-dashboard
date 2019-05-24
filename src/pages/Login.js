@@ -49,9 +49,6 @@ class Login extends Component {
             password: '',
             disabled: false
         }
-
-        this.handleChange = this.handleChange.bind(this)
-        this.signIn = this.signIn.bind(this)
     }
 
     handleChange = name => e => {

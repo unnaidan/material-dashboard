@@ -1,50 +1,10 @@
 import React from 'react'
-import {
-    Route,
-    BrowserRouter as Router,
-    Switch
-} from 'react-router-dom'
-import {
-    ForgotPassword,
-    Home,
-    Login,
-    NotFound,
-    PasswordReset,
-    Register,
-    Users
-} from './pages'
+import { MuiThemeProvider } from '@material-ui/core/styles'
+import { theme } from './theme/muiTheme'
+import Routes from './routes'
 
-export default () => {
-    return (
-        <Router>
-            <Switch>
-                <Route
-                    path="/signin"
-                    component={Login}
-                />
-                <Route
-                    path="/signup"
-                    component={Register}
-                />
-                <Route
-                    path="/forgot/password"
-                    component={ForgotPassword}
-                />
-                <Route
-                    path="/password/reset/:token"
-                    component={PasswordReset}
-                />
-                <Route
-                    path="/"
-                    component={Home}
-                    exact
-                />
-                <Route
-                    path="/users"
-                    component={Users}
-                />
-                <Route component={NotFound} />
-            </Switch>
-        </Router>
-    )
-}
+export default () => (
+    <MuiThemeProvider theme={theme}>
+        <Routes />
+    </MuiThemeProvider>
+)

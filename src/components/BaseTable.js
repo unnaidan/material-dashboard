@@ -78,7 +78,10 @@ class BaseTable extends Component {
     }
 
     select = selection => {
-        // this.props.setSelection(selection)
+        const { items } = this.state
+        const selectedRowsData = items.filter((item, i) => selection.indexOf(i) !== -1)
+
+        this.props.setSelection(selectedRowsData)
         this.setState({ selection })
     }
 
@@ -242,7 +245,10 @@ class BaseTable extends Component {
                         cellComponent={HeaderCell}
                         showSortingControls
                     />
-                    <TableSelection showSelectAll />
+                    <TableSelection
+                        selectByRowClick
+                        showSelectAll
+                    />
                 </Grid>
             </Paper>
         )
