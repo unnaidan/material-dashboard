@@ -24,7 +24,7 @@ import {
     PagingPanel
 } from '@devexpress/dx-react-grid-material-ui'
 import axios from './../plugins/axios'
-import { setSelection } from './../redux/actions'
+import { setSelection } from './../redux/theme/actions'
 
 const styles = theme => ({
     paper: {

@@ -15,7 +15,7 @@ import {
     Menu,
     MenuItem
 } from '@material-ui/core'
-import { removeAuth } from './../redux/actions'
+import { removeAuth } from './../redux/auth/actions'
 import { ThemeContext } from './../theme/context'
 
 const drawerWidth = 260

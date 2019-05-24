@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { token } from './../redux/getters'
+import { token } from './../redux/auth/getters'
 
 const instance = axios.create({
     baseURL: process.env.REACT_APP_API_URL,

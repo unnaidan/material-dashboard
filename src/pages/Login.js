@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core'
 import { ArrowRight } from 'mdi-material-ui'
 import axios from './../plugins/axios'
-import { setAuth } from './../redux/actions'
+import { setAuth } from './../redux/auth/actions'
 import { App } from './../layouts'
 
 const styles = theme => ({

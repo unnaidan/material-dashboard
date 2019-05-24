@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
 import { CssBaseline } from '@material-ui/core'
-import { user } from './../redux/getters'
 
 const styles = theme => ({
     root: {
@@ -47,8 +46,8 @@ class App extends Component {
     }
 }
 
-const mapStateToProps = () => ({
-    user: user()
+const mapStateToProps = state => ({
+    user: state.auth.user
 })
 
 const component = withStyles(styles)(App)

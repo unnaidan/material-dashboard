@@ -4,7 +4,6 @@ import { Redirect } from 'react-router-dom'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
 import { CssBaseline } from '@material-ui/core'
-import { user } from './../redux/getters'
 import { ThemeContext } from './../theme/context'
 import {
     MainBar,
@@ -44,7 +43,6 @@ class Dashboard extends Component {
 
         this.state = {
             drawer: true,
-            signinRoute: '/signin',
             mobileDrawer: false,
             toggleDrawer: this.toggleDrawer,
             toggleMobileDrawer: this.toggleMobileDrawer
@@ -70,13 +68,10 @@ class Dashboard extends Component {
             title,
             children
         } = this.props
-        const {
-            drawer,
-            signinRoute
-        } = this.state
+        const { drawer } = this.state
 
         if (!user) {
-            return <Redirect to={signinRoute} />
+            return <Redirect to="/signin" />
         }
 
         return (
@@ -99,8 +94,8 @@ class Dashboard extends Component {
     }
 }
 
-const mapStateToProps = () => ({
-    user: user()
+const mapStateToProps = state => ({
+    user: state.auth.user
 })
 
 const component = withStyles(styles)(Dashboard)
