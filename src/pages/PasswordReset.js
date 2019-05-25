@@ -142,7 +142,7 @@ class PasswordReset extends Component {
                         <img
                             height="40"
                             className={logo}
-                            src="/images/logo.png"
+                            src="/static/images/logo.png"
                             alt="Logo"
                         />
                         <Typography

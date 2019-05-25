@@ -11,6 +11,7 @@ import {
     NotFound,
     PasswordReset,
     Register,
+    UserForm,
     Users
 } from './pages'
 
@@ -37,6 +38,10 @@ export default () => (
                 path="/"
                 component={Home}
                 exact
+            />
+            <Route
+                path="/users/:id"
+                component={UserForm}
             />
             <Route
                 path="/users"

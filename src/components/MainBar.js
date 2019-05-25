@@ -1,21 +1,14 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
-import {
-    Menu as MenuIcon,
-    Account
-} from 'mdi-material-ui'
+import { Menu as MenuIcon } from 'mdi-material-ui'
 import {
     Hidden,
     Typography,
     AppBar,
     Toolbar,
-    IconButton,
-    Menu,
-    MenuItem
+    IconButton
 } from '@material-ui/core'
-import { removeAuth } from './../redux/auth/actions'
 import { ThemeContext } from './../theme/context'
 
 const drawerWidth = 260
@@ -48,38 +41,11 @@ const styles = theme => ({
     },
     drawerButton: {
         marginRight: 20
-    },
-    menuButton: {
-        color: '#43425d',
-        backgroundColor: '#f5f5f5'
-    },
-    menuItem: {
-        minWidth: 200 - theme.spacing.unit * 4
     }
 })
 
 class MainBar extends Component {
     static contextType = ThemeContext
-
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            anchor: null
-        }
-    }
-
-    openMenu = e => {
-        this.setState({
-            anchor: e.currentTarget
-        })
-    }
-
-    closeMenu = () => {
-        this.setState({
-            anchor: null
-        })
-    }
 
     render() {
         const {
@@ -88,19 +54,15 @@ class MainBar extends Component {
             toggleMobileDrawer
         } = this.context
         const {
-            removeAuth,
             classes,
             title
         } = this.props
-        const { anchor } = this.state
         const {
             appBar,
             toolBar,
             appBarShift,
             typography,
-            drawerButton,
-            menuButton,
-            menuItem
+            drawerButton
         } = classes
 
         return (
@@ -139,49 +101,10 @@ class MainBar extends Component {
                     >
                         {title}
                     </Typography>
-                    <IconButton
-                        aria-owns={anchor ? 'menu-appbar' : undefined}
-                        aria-haspopup="true"
-                        color="inherit"
-                        onClick={this.openMenu}
-                        className={menuButton}
-                    >
-                        <Account />
-                    </IconButton>
-                    <Menu
-                        id="menu-appbar"
-                        open={!!anchor}
-                        onClose={this.closeMenu}
-                        anchorEl={anchor}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                    >
-                        <MenuItem
-                            className={menuItem}
-                            onClick={removeAuth}
-                        >
-                            Гарах
-                        </MenuItem>
-                    </Menu>
                 </Toolbar>
             </AppBar>
         )
     }
 }
 
-const mapDispatchToProps = {
-    removeAuth
-}
-
-const component = withStyles(styles)(MainBar)
-
-export default connect(
-    null,
-    mapDispatchToProps
-)(component)
+export default withStyles(styles)(MainBar)

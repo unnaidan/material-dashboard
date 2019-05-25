@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
 import {
+    Avatar,
+    Button,
     Drawer,
     Hidden,
     List,
@@ -13,6 +16,7 @@ import {
     Home,
     Account
 } from 'mdi-material-ui'
+import { removeAuth } from './../redux/auth/actions'
 import { ThemeContext } from './../theme/context'
 
 const drawerWidth = 260
@@ -24,16 +28,18 @@ const styles = theme => ({
             flexShrink: 0
         }
     },
+    avatar: {
+        width: 60,
+        height: 60
+    },
+    button: {
+        marginTop: 16,
+        borderColor: 'rgba(255, 255, 255, 0.23)',
+        color: '#fff'
+    },
     drawerPaper: {
         width: drawerWidth,
         backgroundColor: '#43425d'
-    },
-    drawerToolbar: {
-        height: 56,
-        paddingTop: 13,
-        paddingBottom: 13,
-        paddingLeft: 16,
-        backgroundColor: 'rgba(255, 255, 255, 0.1)'
     },
     list: {
         paddingTop: 0,
@@ -97,12 +103,16 @@ class MainDrawer extends Component {
             mobileDrawer,
             toggleMobileDrawer
         } = this.context
-        const { classes } = this.props
+        const {
+            classes,
+            removeAuth
+        } = this.props
         const { items } = this.state
         const {
             root,
+            avatar,
+            button,
             drawerPaper,
-            drawerToolbar,
             list,
             listItem,
             listItemActive,
@@ -110,15 +120,27 @@ class MainDrawer extends Component {
             listItemIcon
         } = classes
 
+        const userArea = (
+            <div style={{
+                padding: 16
+            }}>
+                <Avatar
+                    alt="Avatar"
+                    src="/static/images/user.svg"
+                    className={avatar}
+                />
+                <Button
+                    onClick={removeAuth}
+                    className={button}
+                    variant="outlined"
+                >
+                    Гарах
+                </Button>
+            </div>
+        )
+
         const drawerContent = (
             <div>
-                <div className={drawerToolbar}>
-                    <img
-                        height="30"
-                        src="/images/logo-white.png"
-                        alt="Logo"
-                    />
-                </div>
                 <List
                     className={list}
                     component="nav"
@@ -160,6 +182,7 @@ class MainDrawer extends Component {
                         }}
                         open={drawer}
                     >
+                        {userArea}
                         {drawerContent}
                     </Drawer>
                 </Hidden>
@@ -173,6 +196,7 @@ class MainDrawer extends Component {
                             paper: drawerPaper,
                         }}
                     >
+                        {userArea}
                         {drawerContent}
                     </Drawer>
                 </Hidden>
@@ -181,4 +205,13 @@ class MainDrawer extends Component {
     }
 }
 
-export default withStyles(styles)(MainDrawer)
+const mapDispatchToProps = {
+    removeAuth
+}
+
+const component = withStyles(styles)(MainDrawer)
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(component)
