@@ -71,7 +71,8 @@ const styles = theme => ({
         }
     },
     listItemText: {
-        color: '#fff'
+        color: '#fff',
+        fontSize: 15
     },
     listItemIcon: {
         color: '#a5a4bf'
@@ -129,7 +130,7 @@ class MainDrawer extends Component {
             }}>
                 <Avatar
                     alt="Avatar"
-                    src="/static/images/user.png"
+                    src="/static/images/user.svg"
                     className={avatar}
                 />
                 <Button
