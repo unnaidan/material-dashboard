@@ -29,11 +29,14 @@ const styles = theme => ({
         }
     },
     avatar: {
-        width: 60,
-        height: 60
+        width: 70,
+        height: 70,
+        marginLeft: 'auto',
+        marginRight: 'auto'
     },
     button: {
         marginTop: 16,
+        marginBottom: 8,
         borderColor: 'rgba(255, 255, 255, 0.23)',
         color: '#fff'
     },
@@ -126,13 +129,14 @@ class MainDrawer extends Component {
             }}>
                 <Avatar
                     alt="Avatar"
-                    src="/static/images/user.svg"
+                    src="/static/images/user.png"
                     className={avatar}
                 />
                 <Button
                     onClick={removeAuth}
                     className={button}
                     variant="outlined"
+                    fullWidth
                 >
                     Гарах
                 </Button>

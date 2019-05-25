@@ -252,10 +252,7 @@ class BaseTable extends Component {
                         cellComponent={HeaderCell}
                         showSortingControls
                     />
-                    <TableSelection
-                        selectByRowClick
-                        showSelectAll
-                    />
+                    <TableSelection showSelectAll />
                 </Grid>
             </Paper>
         )
