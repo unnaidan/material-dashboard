@@ -69,6 +69,12 @@ class Dashboard extends Component {
             children
         } = this.props
         const { drawer } = this.state
+        const {
+            root,
+            appBarSpacer,
+            content,
+            contentShift
+        } = classes
 
         if (!user) {
             return <Redirect to="/signin" />
@@ -76,16 +82,16 @@ class Dashboard extends Component {
 
         return (
             <ThemeContext.Provider value={this.state}>
-                <div className={classes.root}>
+                <div className={root}>
                     <CssBaseline />
                     <MainBar title={title} />
                     <MainDrawer />
                     <main
-                        className={classNames(classes.content, {
-                            [classes.contentShift]: drawer,
+                        className={classNames(content, {
+                            [contentShift]: drawer,
                         })}
                     >
-                        <div className={classes.appBarSpacer} />
+                        <div className={appBarSpacer} />
                         {children}
                     </main>
                 </div>

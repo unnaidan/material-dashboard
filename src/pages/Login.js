@@ -23,7 +23,7 @@ const styles = theme => ({
         fontWeight: 300,
         color: grey[600]
     },
-    image: {
+    logo: {
         display: 'block',
         margin: '50px auto'
     },
@@ -96,11 +96,18 @@ class Login extends Component {
             password,
             disabled
         } = this.state
+        const {
+            root,
+            typography,
+            logo,
+            button,
+            extendedIcon
+        } = classes
 
         return (
             <App>
                 <Grid
-                    className={classes.root}
+                    className={root}
                     justify="center"
                     alignItems="center"
                     spacing={16}
@@ -116,13 +123,13 @@ class Login extends Component {
                     >
                         <img
                             height="40"
-                            className={classes.image}
+                            className={logo}
                             src="/images/logo.png"
                             alt="Logo"
                         />
                         <Typography
                             variant="h6"
-                            className={classes.typography}
+                            className={typography}
                             align="center"
                         >
                             Hello there! Sign in and start managing <br /> your app
@@ -152,13 +159,13 @@ class Login extends Component {
                                 fullWidth
                             />
                             <Fab
-                                className={classes.button}
+                                className={button}
                                 disabled={disabled}
                                 variant="extended"
                                 type="submit"
                             >
                                 Нэвтрэх
-                                <ArrowRight className={classes.extendedIcon} />
+                                <ArrowRight className={extendedIcon} />
                             </Fab>
                         </form>
                     </Grid>

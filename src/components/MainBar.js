@@ -41,7 +41,7 @@ const styles = theme => ({
             duration: theme.transitions.duration.enteringScreen
         }),
     },
-    title: {
+    typography: {
         flexGrow: 1,
         fontWeight: 400,
         color: '#43425d'
@@ -93,22 +93,31 @@ class MainBar extends Component {
             title
         } = this.props
         const { anchor } = this.state
+        const {
+            appBar,
+            toolBar,
+            appBarShift,
+            typography,
+            drawerButton,
+            menuButton,
+            menuItem
+        } = classes
 
         return (
             <AppBar
                 color="inherit"
                 position="fixed"
-                className={classNames(classes.appBar, {
-                    [classes.appBarShift]: drawer
+                className={classNames(appBar, {
+                    [appBarShift]: drawer
                 })}
             >
-                <Toolbar className={classes.toolBar}>
+                <Toolbar className={toolBar}>
                     <Hidden xsDown implementation="css">
                         <IconButton
                             color="inherit"
                             aria-label="Open drawer"
                             onClick={toggleDrawer}
-                            className={classes.drawerButton}
+                            className={drawerButton}
                         >
                             <MenuIcon />
                         </IconButton>
@@ -118,7 +127,7 @@ class MainBar extends Component {
                             color="inherit"
                             aria-label="Open drawer"
                             onClick={toggleMobileDrawer}
-                            className={classes.drawerButton}
+                            className={drawerButton}
                         >
                             <MenuIcon />
                         </IconButton>
@@ -126,7 +135,7 @@ class MainBar extends Component {
                     <Typography
                         variant="h6"
                         color="inherit"
-                        className={classes.title}
+                        className={typography}
                     >
                         {title}
                     </Typography>
@@ -135,7 +144,7 @@ class MainBar extends Component {
                         aria-haspopup="true"
                         color="inherit"
                         onClick={this.openMenu}
-                        className={classes.menuButton}
+                        className={menuButton}
                     >
                         <Account />
                     </IconButton>
@@ -154,7 +163,7 @@ class MainBar extends Component {
                         }}
                     >
                         <MenuItem
-                            className={classes.menuItem}
+                            className={menuItem}
                             onClick={removeAuth}
                         >
                             Гарах

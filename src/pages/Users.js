@@ -1,22 +1,54 @@
 import React, { Component } from 'react'
+import { withStyles } from '@material-ui/core/styles'
 import { Dashboard } from './../layouts'
+import { BaseTable } from './../components'
 
-export default class Users extends Component {
+const styles = theme => ({
+    //
+})
+
+class Users extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            title: 'Хэрэглэгч'
+            title: 'Хэрэглэгч',
+            columns: [
+                {
+                    name: 'name',
+                    title: 'Нэр'
+                },
+                {
+                    name: 'email',
+                    title: 'И-мэйл хаяг'
+                },
+                {
+                    name: 'created',
+                    title: 'Үүсгэсэн'
+                },
+                {
+                    name: 'updated',
+                    title: 'Шинэчилсэн'
+                }
+            ]
         }
     }
-    
+
     render() {
-        const { title } = this.state
+        const {
+            title,
+            columns
+        } = this.state
 
         return (
             <Dashboard title={title}>
-                <div>Users</div>
+                <BaseTable
+                    path="users"
+                    columns={columns}
+                />
             </Dashboard>
         )
     }
 }
+
+export default withStyles(styles)(Users)

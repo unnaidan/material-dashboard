@@ -30,7 +30,7 @@ const styles = theme => ({
     paper: {
         boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)',
     },
-    search: {
+    searchIcon: {
         position: 'absolute',
         top: 0,
         left: 0,
@@ -127,13 +127,14 @@ class BaseTable extends Component {
             page,
             rowsPerPage
         } = this.state
+        const { path }= this.props
 
         try {
             const {
                 total,
                 currentPage,
                 data
-            } = await axios.get('users', {
+            } = await axios.get(path, {
                 params: {
                     sortBy,
                     sortOrder,
@@ -167,6 +168,12 @@ class BaseTable extends Component {
             total
         } = this.state
         const { columns, classes } = this.props
+        const {
+            paper,
+            searchIcon,
+            inputRoot,
+            input
+        } = classes
 
         const HeaderCell = props => (
             <TableHeaderRow.Cell
@@ -191,13 +198,13 @@ class BaseTable extends Component {
             <div style={{
                 position: 'relative'
             }}>
-                <div className={classes.search}>
+                <div className={searchIcon}>
                     <Magnify />
                 </div>
                 <InputBase
                     classes={{
-                        root: classes.inputRoot,
-                        input: classes.input
+                        root: inputRoot,
+                        input: input
                     }}
                     value={search}
                     onChange={this.handleSearch}
@@ -210,7 +217,7 @@ class BaseTable extends Component {
 
         return (
             <Paper
-                className={classes.paper}
+                className={paper}
                 square
             >
                 {SearchBar}

@@ -18,7 +18,7 @@ import { ThemeContext } from './../theme/context'
 const drawerWidth = 260
 
 const styles = theme => ({
-    drawer: {
+    root: {
         [theme.breakpoints.up('sm')]: {
             width: drawerWidth,
             flexShrink: 0
@@ -99,19 +99,28 @@ class MainDrawer extends Component {
         } = this.context
         const { classes } = this.props
         const { items } = this.state
+        const {
+            root,
+            drawerPaper,
+            drawerToolbar,
+            list,
+            listItem,
+            listItemActive,
+            listItemText,
+            listItemIcon
+        } = classes
 
         const drawerContent = (
             <div>
-                <div className={classes.drawerToolbar}>
+                <div className={drawerToolbar}>
                     <img
                         height="30"
-                        className={classes.drawerImage}
                         src="/images/logo-white.png"
                         alt="Logo"
                     />
                 </div>
                 <List
-                    className={classes.list}
+                    className={list}
                     component="nav"
                 >
                     {items.map(({ to, label, icon }, index) =>
@@ -119,18 +128,18 @@ class MainDrawer extends Component {
                             to={to}
                             key={index}
                             component={NavLink}
-                            className={classes.listItem}
-                            activeClassName={classes.listItemActive}
+                            className={listItem}
+                            activeClassName={listItemActive}
                             button
                             exact
                         >
-                            <ListItemIcon className={classes.listItemIcon}>
+                            <ListItemIcon className={listItemIcon}>
                                 {icon}
                             </ListItemIcon>
                             <ListItemText
                                 primary={label}
                                 classes={{
-                                    primary: classes.listItemText,
+                                    primary: listItemText,
                                 }}
                             />
                         </ListItem>
@@ -145,9 +154,9 @@ class MainDrawer extends Component {
                     <Drawer
                         variant="persistent"
                         anchor="left"
-                        className={classes.drawer}
+                        className={root}
                         classes={{
-                            paper: classes.drawerPaper
+                            paper: drawerPaper
                         }}
                         open={drawer}
                     >
@@ -161,7 +170,7 @@ class MainDrawer extends Component {
                         open={mobileDrawer}
                         onClose={toggleMobileDrawer}
                         classes={{
-                            paper: classes.drawerPaper,
+                            paper: drawerPaper,
                         }}
                     >
                         {drawerContent}

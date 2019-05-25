@@ -30,15 +30,19 @@ class App extends Component {
             children
         } = this.props
         const { homeRoute } = this.state
+        const {
+            root,
+            content
+        } = classes
 
         if (user) {
             return <Redirect to={homeRoute} />
         }
 
         return (
-            <div className={classes.root}>
+            <div className={root}>
                 <CssBaseline />
-                <main className={classes.content}>
+                <main className={content}>
                     {children}
                 </main>
             </div>
