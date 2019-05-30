@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { withStyles } from '@material-ui/styles'
-import { CssBaseline } from '@material-ui/core'
 
 const styles = theme => ({
     root: {
@@ -41,7 +40,6 @@ class App extends Component {
 
         return (
             <div className={root}>
-                <CssBaseline />
                 <main className={content}>
                     {children}
                 </main>

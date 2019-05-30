@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/styles'
-import { CssBaseline } from '@material-ui/core'
 import { ThemeContext } from './../theme/context'
 import {
     MainBar,
@@ -83,7 +82,6 @@ class Dashboard extends Component {
         return (
             <ThemeContext.Provider value={this.state}>
                 <div className={root}>
-                    <CssBaseline />
                     <MainBar title={title} />
                     <MainDrawer />
                     <main
