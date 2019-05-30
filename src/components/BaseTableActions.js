@@ -10,9 +10,9 @@ import {
 } from '@material-ui/core'
 import {
     Plus,
-    Delete
+    Delete as DeleteIcon
 } from 'mdi-material-ui'
-import DeleteDialog from './DeleteDialog'
+import Delete from './Delete'
 
 const styles = theme => ({
     plusIcon: {
@@ -77,7 +77,7 @@ class BaseTableActions extends Component {
                         <Grid item>
                             <IconButton
                                 color="secondary"
-                                children={<Delete />}
+                                children={<DeleteIcon />}
                                 onClick={this.open}
                                 disabled={this.isEmpty()}
                                 style={{
@@ -87,7 +87,7 @@ class BaseTableActions extends Component {
                         </Grid>
                     </Grid>
                 </Box>
-                <DeleteDialog
+                <Delete
                     open={open}
                     onClose={this.close}
                     path={deletePath}

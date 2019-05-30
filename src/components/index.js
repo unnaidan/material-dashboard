@@ -1,13 +1,13 @@
 import BaseTable from './BaseTable'
 import BaseTableActions from './BaseTableActions'
-import DeleteDialog from './DeleteDialog'
+import Delete from './Delete'
 import MainBar from './MainBar'
 import MainDrawer from './MainDrawer'
 
 export {
     BaseTable,
     BaseTableActions,
-    DeleteDialog,
+    Delete,
     MainBar,
     MainDrawer
 }
