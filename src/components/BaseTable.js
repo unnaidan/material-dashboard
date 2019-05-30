@@ -5,6 +5,7 @@ import {
     Divider,
     LinearProgress,
     InputBase,
+    TableSortLabel,
     Paper
 } from '@material-ui/core'
 import { Magnify } from 'mdi-material-ui'
@@ -127,7 +128,7 @@ class BaseTable extends Component {
             page,
             rowsPerPage
         } = this.state
-        const { path }= this.props
+        const { path } = this.props
 
         try {
             const {
@@ -194,6 +195,15 @@ class BaseTable extends Component {
             />
         )
 
+        const SortLabel = ({ onSort, children, direction }) => (
+            <TableSortLabel
+                onClick={onSort}
+                children={children}
+                active={!!direction}
+                direction={direction || 'asc'}
+            />
+        )
+
         const SearchBar = (
             <div style={{
                 position: 'relative'
@@ -250,6 +260,7 @@ class BaseTable extends Component {
                     />
                     <TableHeaderRow
                         cellComponent={HeaderCell}
+                        sortLabelComponent={SortLabel}
                         showSortingControls
                     />
                     <TableSelection showSelectAll />
