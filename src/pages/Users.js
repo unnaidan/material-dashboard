@@ -46,7 +46,7 @@ class Users extends Component {
         return (
             <Dashboard title={title}>
                 <BaseTableActions
-                    newUrl="/users/new"
+                    newPath="/users/new"
                     deletePath="/users/mass/destroy"
                 />
                 <BaseTable

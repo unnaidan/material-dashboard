@@ -41,17 +41,19 @@ class BaseTableActions extends Component {
         })
     }
 
+    isEmpty = () => {
+        const { selection } = this.props
+        return !selection.length
+    }
+
     render() {
         const { open } = this.state
         const {
-            newUrl,
+            newPath,
             deletePath,
-            selection,
             classes
         } = this.props
-        const {
-            plusIcon
-        } = classes
+        const { plusIcon } = classes
 
         return (
             <div>
@@ -66,7 +68,7 @@ class BaseTableActions extends Component {
                                 color="primary"
                                 variant="contained"
                                 component={Link}
-                                to={newUrl}
+                                to={newPath}
                             >
                                 <Plus className={plusIcon} />
                                 Шинэ
@@ -75,14 +77,13 @@ class BaseTableActions extends Component {
                         <Grid item>
                             <IconButton
                                 color="secondary"
+                                children={<Delete />}
                                 onClick={this.open}
-                                disabled={!selection.length}
+                                disabled={this.isEmpty()}
                                 style={{
                                     padding: 6
                                 }}
-                            >
-                                <Delete />
-                            </IconButton>
+                            />
                         </Grid>
                     </Grid>
                 </Box>
