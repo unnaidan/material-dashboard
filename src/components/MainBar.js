@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/styles'
 import { Menu as MenuIcon } from 'mdi-material-ui'
 import {
     Hidden,
@@ -40,7 +40,7 @@ const styles = theme => ({
         color: '#43425d'
     },
     drawerButton: {
-        marginRight: 20
+        marginRight: theme.spacing(2)
     }
 })
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import classNames from 'classnames'
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/styles'
 import { CssBaseline } from '@material-ui/core'
 import { ThemeContext } from './../theme/context'
 import {
@@ -21,7 +21,7 @@ const styles = theme => ({
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing.unit * 3,
+        padding: theme.spacing(3),
         marginLeft: -drawerWidth,
         transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.sharp,

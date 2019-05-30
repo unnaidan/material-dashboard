@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/styles'
 import {
     Divider,
     LinearProgress,
@@ -39,17 +39,17 @@ const styles = theme => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        width: theme.spacing.unit * 8,
+        width: theme.spacing(8),
         color: 'rgba(0, 0, 0, 0.54)'
     },
     inputRoot: {
-        padding: theme.spacing.unit * 2,
-        paddingLeft: theme.spacing.unit * 8
+        padding: theme.spacing(2),
+        paddingLeft: theme.spacing(8)
     },
     input: {
         height: 16,
-        paddingTop: theme.spacing.unit,
-        paddingBottom: theme.spacing.unit
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(1)
     }
 })
 

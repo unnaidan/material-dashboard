@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/styles'
 import {
     Avatar,
     Button,
@@ -35,8 +35,8 @@ const styles = theme => ({
         marginRight: 'auto'
     },
     button: {
-        marginTop: 16,
-        marginBottom: 8,
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(1),
         borderColor: 'rgba(255, 255, 255, 0.23)',
         color: '#fff'
     },
@@ -49,8 +49,8 @@ const styles = theme => ({
         paddingBottom: 0
     },
     listItem: {
-        paddingTop: 16,
-        paddingBottom: 16
+        paddingTop: theme.spacing(2),
+        paddingBottom: theme.spacing(2)
     },
     listItemActive: {
         position: 'relative',
@@ -90,12 +90,14 @@ class MainDrawer extends Component {
                 {
                     to: '/',
                     label: 'Нүүр',
-                    icon: <Home />
+                    icon: <Home />,
+                    exact: true
                 },
                 {
                     to: '/users',
                     label: 'Хэрэглэгч',
-                    icon: <Account />
+                    icon: <Account />,
+                    exact: false
                 }
             ]
         }
@@ -150,15 +152,15 @@ class MainDrawer extends Component {
                     className={list}
                     component="nav"
                 >
-                    {items.map(({ to, label, icon }, index) =>
+                    {items.map(({ to, label, icon, exact }, index) =>
                         <ListItem
                             to={to}
                             key={index}
                             component={NavLink}
                             className={listItem}
                             activeClassName={listItemActive}
+                            exact={exact}
                             button
-                            exact
                         >
                             <ListItemIcon className={listItemIcon}>
                                 {icon}

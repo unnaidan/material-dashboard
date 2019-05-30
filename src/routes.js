@@ -40,6 +40,10 @@ export default () => (
                 exact
             />
             <Route
+                path="/users/new"
+                component={UserForm}
+            />
+            <Route
                 path="/users/:id"
                 component={UserForm}
             />

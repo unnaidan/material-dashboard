@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/styles'
 import { grey } from '@material-ui/core/colors'
 import {
     Grid,
@@ -49,9 +49,6 @@ class ForgotPassword extends Component {
             errors: {},
             disabled: false
         }
-
-        this.handleChange = this.handleChange.bind(this)
-        this.sendEmail = this.sendEmail.bind(this)
     }
 
     handleClose = () => {

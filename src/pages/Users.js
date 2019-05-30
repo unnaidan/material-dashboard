@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles } from '@material-ui/styles'
 import { Dashboard } from './../layouts'
-import { BaseTable } from './../components'
+import {
+     BaseTable ,
+     BaseTableActions
+     } from './../components'
 
 const styles = theme => ({
     //
@@ -42,6 +45,10 @@ class Users extends Component {
 
         return (
             <Dashboard title={title}>
+                <BaseTableActions
+                    newUrl="/users/new"
+                    deletePath="/users/mass/destroy"
+                />
                 <BaseTable
                     path="users"
                     columns={columns}
