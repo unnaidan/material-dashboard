@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/styles'
 import { Dashboard } from './../layouts'
 import {
-     BaseTable ,
-     BaseTableActions
-     } from './../components'
+    BaseTable,
+    BaseTableActions
+} from './../components'
 
 const styles = theme => ({
     //
