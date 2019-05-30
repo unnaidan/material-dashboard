@@ -46,6 +46,7 @@ class ForgotPassword extends Component {
         this.state = {
             email: '',
             open: false,
+            errors: {},
             disabled: false
         }
 
@@ -69,6 +70,7 @@ class ForgotPassword extends Component {
         e.preventDefault()
 
         this.setState({
+            errors: {},
             disabled: true
         })
 
@@ -84,7 +86,11 @@ class ForgotPassword extends Component {
             })
         } catch (err) {
             if (err.response.status === 422) {
-                // Validation
+                const { errors } = err.response.data
+                this.setState({
+                    errors,
+                    disabled: false
+                })
             }
         }
     }
@@ -93,6 +99,7 @@ class ForgotPassword extends Component {
         const { classes } = this.props
         const {
             email,
+            errors,
             disabled,
             open
         } = this.state
@@ -142,6 +149,7 @@ class ForgotPassword extends Component {
                             <TextField
                                 label="И-мэйл хаяг"
                                 value={email}
+                                error={!!errors.email}
                                 onChange={this.handleChange('email')}
                                 type="email"
                                 variant="outlined"

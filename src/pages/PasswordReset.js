@@ -48,6 +48,7 @@ class PasswordReset extends Component {
             password: '',
             passwordConfirm: '',
             open: false,
+            errors: {},
             disabled: false
         }
 
@@ -71,6 +72,7 @@ class PasswordReset extends Component {
         e.preventDefault()
 
         this.setState({
+            errors: {},
             disabled: true
         })
 
@@ -100,7 +102,11 @@ class PasswordReset extends Component {
             }, 3000)
         } catch (err) {
             if (err.response.status === 422) {
-                // Validation
+                const { errors } = err.response.data
+                this.setState({
+                    errors,
+                    disabled: false
+                })
             }
         }
     }
@@ -112,6 +118,7 @@ class PasswordReset extends Component {
             password,
             passwordConfirm,
             open,
+            errors,
             disabled
         } = this.state
         const {
@@ -160,6 +167,7 @@ class PasswordReset extends Component {
                             <TextField
                                 label="И-мэйл хаяг"
                                 value={email}
+                                error={!!errors.email}
                                 onChange={this.handleChange('email')}
                                 type="email"
                                 variant="outlined"
@@ -170,6 +178,7 @@ class PasswordReset extends Component {
                             <TextField
                                 label="Нууц үг"
                                 value={password}
+                                error={!!errors.password}
                                 onChange={this.handleChange('password')}
                                 type="password"
                                 variant="outlined"

@@ -47,6 +47,7 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
+            errors: {},
             disabled: false
         }
     }
@@ -61,6 +62,7 @@ class Login extends Component {
         e.preventDefault()
 
         this.setState({
+            errors: {},
             disabled: true
         })
 
@@ -84,7 +86,11 @@ class Login extends Component {
             history.push('/')
         } catch (err) {
             if (err.response.status === 422) {
-                // Validation
+                const { errors } = err.response.data
+                this.setState({
+                    errors,
+                    disabled: false
+                })
             }
         }
     }
@@ -94,6 +100,7 @@ class Login extends Component {
         const {
             email,
             password,
+            errors,
             disabled
         } = this.state
         const {
@@ -142,6 +149,7 @@ class Login extends Component {
                             <TextField
                                 label="И-мэйл хаяг"
                                 value={email}
+                                error={!!errors.email}
                                 onChange={this.handleChange('email')}
                                 type="email"
                                 variant="outlined"
@@ -152,6 +160,7 @@ class Login extends Component {
                             <TextField
                                 label="Нууц үг"
                                 value={password}
+                                error={!!errors.password}
                                 onChange={this.handleChange('password')}
                                 type="password"
                                 variant="outlined"

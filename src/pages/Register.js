@@ -49,6 +49,7 @@ class Register extends Component {
             password: '',
             passwordConfirm: '',
             open: false,
+            errors: {},
             disabled: false
         }
 
@@ -72,6 +73,7 @@ class Register extends Component {
         e.preventDefault()
 
         this.setState({
+            errors: {},
             disabled: true
         })
 
@@ -100,7 +102,11 @@ class Register extends Component {
             })
         } catch (err) {
             if (err.response.status === 422) {
-                // Validation
+                const { errors } = err.response.data
+                this.setState({
+                    errors,
+                    disabled: false
+                })
             }
         }
     }
@@ -112,6 +118,7 @@ class Register extends Component {
             email,
             password,
             passwordConfirm,
+            errors,
             disabled,
             open
         } = this.state
@@ -161,6 +168,7 @@ class Register extends Component {
                             <TextField
                                 label="Нэр"
                                 value={name}
+                                error={!!errors.name}
                                 onChange={this.handleChange('name')}
                                 variant="outlined"
                                 margin="normal"
@@ -170,6 +178,7 @@ class Register extends Component {
                             <TextField
                                 label="И-мэйл хаяг"
                                 value={email}
+                                error={!!errors.email}
                                 onChange={this.handleChange('email')}
                                 type="email"
                                 variant="outlined"
@@ -179,6 +188,7 @@ class Register extends Component {
                             <TextField
                                 label="Нууц үг"
                                 value={password}
+                                error={!!errors.password}
                                 onChange={this.handleChange('password')}
                                 variant="outlined"
                                 margin="normal"
