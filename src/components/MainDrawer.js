@@ -29,10 +29,11 @@ const styles = theme => ({
         }
     },
     avatar: {
-        width: 70,
-        height: 70,
+        width: 60,
+        height: 60,
         marginLeft: 'auto',
-        marginRight: 'auto'
+        marginRight: 'auto',
+        borderRadius: 0
     },
     button: {
         marginTop: theme.spacing(2),
