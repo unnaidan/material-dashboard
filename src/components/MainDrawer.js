@@ -49,10 +49,6 @@ const styles = theme => ({
         paddingTop: 0,
         paddingBottom: 0
     },
-    listItem: {
-        paddingTop: theme.spacing(2),
-        paddingBottom: theme.spacing(2)
-    },
     listItemActive: {
         position: 'relative',
         backgroundColor: theme.palette.action.selected,
