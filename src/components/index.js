@@ -1,3 +1,4 @@
+import BasePasswordField from './BasePasswordField'
 import BaseTable from './BaseTable'
 import BaseTableActions from './BaseTableActions'
 import Delete from './Delete'
@@ -7,6 +8,7 @@ import MainBar from './MainBar'
 import MainDrawer from './MainDrawer'
 
 export {
+    BasePasswordField,
     BaseTable,
     BaseTableActions,
     Delete,

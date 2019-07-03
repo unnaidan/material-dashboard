@@ -12,6 +12,7 @@ import { ArrowRight } from 'mdi-material-ui'
 import axios from './../plugins/axios'
 import { setAuth } from './../redux/auth/actions'
 import { App } from './../layouts'
+import { BasePasswordField } from './../components'
 
 const styles = theme => ({
     root: {
@@ -157,15 +158,11 @@ class Login extends Component {
                                 fullWidth
                                 autoFocus
                             />
-                            <TextField
+                            <BasePasswordField
                                 label="Нууц үг"
                                 value={password}
                                 error={!!errors.password}
                                 onChange={this.handleChange('password')}
-                                type="password"
-                                variant="outlined"
-                                margin="normal"
-                                fullWidth
                             />
                             <Fab
                                 className={button}
