@@ -31,10 +31,10 @@ class BasePasswordField extends Component {
 
     render() {
         const {
-            label,
             value,
+            onChange,
+            label,
             error,
-            onChange
         } = this.props
         const { showPassword } = this.state
 

@@ -51,6 +51,7 @@ class BaseTableActions extends Component {
         const {
             newPath,
             deletePath,
+            onDelete,
             classes
         } = this.props
         const { plusIcon } = classes
@@ -91,6 +92,7 @@ class BaseTableActions extends Component {
                     open={open}
                     onClose={this.close}
                     path={deletePath}
+                    onDelete={onDelete}
                 />
             </div>
         )

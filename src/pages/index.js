@@ -4,7 +4,6 @@ import Login from './Login'
 import NotFound from './NotFound'
 import PasswordReset from './PasswordReset'
 import Register from './Register'
-import UserForm from './UserForm'
 import Users from './Users'
 
 export {
@@ -14,6 +13,5 @@ export {
     NotFound,
     PasswordReset,
     Register,
-    UserForm,
     Users
 }

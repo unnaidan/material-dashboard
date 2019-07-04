@@ -10,10 +10,9 @@ import {
     ListItemText,
     ListItemSecondaryAction,
     IconButton,
-    LinearProgress,
     CircularProgress,
     Avatar,
-    Grow
+    Fade
 } from '@material-ui/core'
 import {
     Download,
@@ -197,6 +196,7 @@ class DropZone extends Component {
                     <img
                         className={uploaderImage}
                         src="/static/images/box.png"
+                        alt="box"
                     />
                     <Typography
                         variant="subtitle1"
@@ -228,7 +228,7 @@ class DropZone extends Component {
 
         const fileManager = (
             <div>
-                <Grow in={!!file}>
+                <Fade in>
                     <List>
                         <ListItem>
                             <ListItemAvatar>
@@ -259,7 +259,7 @@ class DropZone extends Component {
                             </ListItemSecondaryAction>
                         </ListItem>
                     </List>
-                </Grow>
+                </Fade>
             </div>
         )
 

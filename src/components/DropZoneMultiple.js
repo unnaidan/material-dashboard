@@ -207,6 +207,7 @@ class DropZoneMultiple extends Component {
                     <img
                         className={uploaderImage}
                         src="/static/images/box.png"
+                        alt="box"
                     />
                     <Typography
                         variant="subtitle1"

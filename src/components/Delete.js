@@ -59,18 +59,27 @@ class BaseDialogDelete extends Component {
         const {
             path,
             selection,
-            onClose
+            onClose,
+            onDelete
         } = this.props
 
         try {
             await axios.post(path, {
-                ids: selection.map(({ id }) => id)
+                ids: selection.map(({ _id }) => _id)
             })
 
             onClose()
+
+            this.props.dispatch({
+                type: 'SELECt',
+                items: []
+            })
+
             this.setState({
                 disabled: false
             })
+
+            await onDelete()
         } catch (e) {
             //
         }
@@ -108,9 +117,7 @@ class BaseDialogDelete extends Component {
                         variant="h6"
                         children="Устгах"
                         className={typography}
-                    >
-                        Устгах
-                    </Typography>
+                    />
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>

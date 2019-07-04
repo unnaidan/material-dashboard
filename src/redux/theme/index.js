@@ -1,17 +1,46 @@
 import { createReducer } from 'redux-create-reducer'
 import {
-    SET_SELECTION
+    START_LOADING,
+    END_LOADING,
+    INCREMENT_PENDING_REQUESTS,
+    DECREMENT_PENDING_REQUESTS,
+    SELECT
 } from './actionTypes'
 
 const state = {
-    selection: []
+    loading: false,
+    pendingRequests: 0
 }
 
 const mutations = {
-    [SET_SELECTION](state, { selection }) {
+    [START_LOADING](state) {
         return {
             ...state,
-            selection
+            loading: true
+        }
+    },
+    [END_LOADING](state) {
+        return {
+            ...state,
+            loading: false
+        }
+    },
+    [INCREMENT_PENDING_REQUESTS](state) {
+        return {
+            ...state,
+            pendingRequests: state.pendingRequests + 1
+        }
+    },
+    [DECREMENT_PENDING_REQUESTS](state) {
+        return {
+            ...state,
+            pendingRequests: state.pendingRequests - 1
+        }
+    },
+    [SELECT](state, { items }) {
+        return {
+            ...state,
+            selection: items
         }
     }
 }

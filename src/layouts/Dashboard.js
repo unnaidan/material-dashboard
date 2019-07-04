@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/styles'
 import { ThemeContext } from './../theme/context'
 import {
     MainBar,
+    MainDialogLoader,
     MainDrawer
 } from './../components'
 
@@ -83,6 +84,7 @@ class Dashboard extends Component {
             <ThemeContext.Provider value={this.state}>
                 <div className={root}>
                     <MainBar title={title} />
+                    <MainDialogLoader />
                     <MainDrawer />
                     <main
                         className={classNames(content, {

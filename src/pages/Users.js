@@ -14,33 +14,39 @@ class Users extends Component {
     constructor(props) {
         super(props)
 
+        this.table = React.createRef()
+
         this.state = {
             title: 'Хэрэглэгч',
             columns: [
-                {
-                    name: 'name',
-                    title: 'Нэр'
-                },
                 {
                     name: 'email',
                     title: 'И-мэйл хаяг'
                 },
                 {
-                    name: 'created',
+                    name: 'createdAt',
                     title: 'Үүсгэсэн'
                 },
                 {
-                    name: 'updated',
+                    name: 'updatedAt',
                     title: 'Шинэчилсэн'
                 }
+            ],
+            dateColumns: [
+                'createdAt', 'updatedAt'
             ]
         }
+    }
+
+    onDelete = async () => {
+        await this.table.current.fetchData()
     }
 
     render() {
         const {
             title,
-            columns
+            columns,
+            dateColumns
         } = this.state
 
         return (
@@ -48,10 +54,13 @@ class Users extends Component {
                 <BaseTableActions
                     newPath="/users/new"
                     deletePath="/users/mass/destroy"
+                    onDelete={this.onDelete}
                 />
                 <BaseTable
                     path="users"
                     columns={columns}
+                    dateColumns={dateColumns}
+                    innerRef={this.table}
                 />
             </Dashboard>
         )

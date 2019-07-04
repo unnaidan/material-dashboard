@@ -19,25 +19,28 @@ const styles = theme => ({
         flexGrow: 1
     },
     typography: {
-        marginTop: 50,
+        marginTop: 30,
         marginBottom: 30,
         fontWeight: 300,
         color: grey[600]
     },
     logo: {
         display: 'block',
-        margin: '50px auto'
+        margin: '50px auto 30px'
     },
     button: {
         display: 'flex',
         margin: '50px auto',
-        minWidth: 230,
-        boxShadow: '0 24px 38px rgba(0, 0, 0, 0.14)',
-        backgroundColor: '#fff'
+        minWidth: 230
     },
     extendedIcon: {
         marginLeft: 10,
-        color: grey[600]
+        color: grey[400]
+    },
+    br: {
+        '@media (max-width: 767px)': {
+            display: 'none'
+        }
     }
 })
 
@@ -109,7 +112,8 @@ class Login extends Component {
             typography,
             logo,
             button,
-            extendedIcon
+            extendedIcon,
+            br
         } = classes
 
         return (
@@ -118,7 +122,7 @@ class Login extends Component {
                     className={root}
                     justify="center"
                     alignItems="center"
-                    spacing={16}
+                    spacing={2}
                     container
                 >
                     <Grid
@@ -130,9 +134,9 @@ class Login extends Component {
                         xl={4}
                     >
                         <img
-                            height="40"
+                            height="50"
                             className={logo}
-                            src="/static/images/logo.png"
+                            src="/static/images/logo-small.png"
                             alt="Logo"
                         />
                         <Typography
@@ -140,7 +144,7 @@ class Login extends Component {
                             className={typography}
                             align="center"
                         >
-                            Hello there! Sign in and start managing <br /> your app
+                            Hello there! Sign in and start managing <br className={br} /> your app
                         </Typography>
                         <form
                             onSubmit={this.signIn}
@@ -167,6 +171,7 @@ class Login extends Component {
                             <Fab
                                 className={button}
                                 disabled={disabled}
+                                color="primary"
                                 variant="extended"
                                 type="submit"
                             >

@@ -16,6 +16,7 @@ import {
     PagingState,
     IntegratedSelection,
     CustomPaging,
+    DataTypeProvider
 } from '@devexpress/dx-react-grid'
 import {
     Grid,
@@ -25,7 +26,8 @@ import {
     PagingPanel
 } from '@devexpress/dx-react-grid-material-ui'
 import axios from './../plugins/axios'
-import { setSelection } from './../redux/theme/actions'
+import FormatCurrency from './FormatCurrency'
+import FormatDate from './FormatDate'
 
 const styles = theme => ({
     paper: {
@@ -57,7 +59,40 @@ const tableMessages = {
     noData: 'Дата байхгүй'
 }
 
+const BooleanFormatter = ({ value }) => (
+    <span>
+        {value ? 'Тийм' : 'Үгүй'}
+    </span>
+)
+
+const DateTypeProvider = props => (
+    <DataTypeProvider
+        formatterComponent={FormatDate}
+        {...props}
+    />
+)
+
+const CurrencyTypeProvider = props => (
+    <DataTypeProvider
+        formatterComponent={FormatCurrency}
+        {...props}
+    />
+)
+
+const BooleanTypeProvider = props => (
+    <DataTypeProvider
+        formatterComponent={BooleanFormatter}
+        {...props}
+    />
+)
+
 class BaseTable extends Component {
+    static defaultProps = {
+        dateColumns: [],
+        booleanColumns: [],
+        currencyColumns: []
+    }
+
     constructor(props) {
         super(props)
 
@@ -82,8 +117,12 @@ class BaseTable extends Component {
         const { items } = this.state
         const selectedRowsData = items.filter((item, i) => selection.indexOf(i) !== -1)
 
-        this.props.setSelection(selectedRowsData)
         this.setState({ selection })
+
+        this.props.dispatch({
+            type: 'SELECT',
+            items: selectedRowsData
+        })
     }
 
     handleSearch = e => {
@@ -168,7 +207,13 @@ class BaseTable extends Component {
             rowsPerPage,
             total
         } = this.state
-        const { columns, classes } = this.props
+        const {
+            columns,
+            dateColumns,
+            booleanColumns,
+            currencyColumns,
+            classes
+        } = this.props
         const {
             paper,
             searchIcon,
@@ -254,6 +299,15 @@ class BaseTable extends Component {
                     />
                     <IntegratedSelection />
                     <PagingPanel />
+                    <DateTypeProvider
+                        for={dateColumns}
+                    />
+                    <CurrencyTypeProvider
+                        for={currencyColumns}
+                    />
+                    <BooleanTypeProvider
+                        for={booleanColumns}
+                    />
                     <Table
                         messages={tableMessages}
                         cellComponent={BodyCell}
@@ -270,13 +324,9 @@ class BaseTable extends Component {
     }
 }
 
-const mapDispatchToProps = {
-    setSelection
-}
-
 const component = withStyles(styles)(BaseTable)
 
 export default connect(
     null,
-    mapDispatchToProps
+    null
 )(component)
