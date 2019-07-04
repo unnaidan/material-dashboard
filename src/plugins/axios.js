@@ -3,6 +3,12 @@ import { store } from './../redux/store'
 
 const { dispatch } = store
 
+const counter = () => {
+    return store.getState()
+        .theme
+        .pendingRequests
+}
+
 const instance = axios.create({
     baseURL: `${process.env.REACT_APP_API_URL}/api`,
     responseType: 'json'
@@ -26,6 +32,9 @@ instance.interceptors.request.use(config => {
 const handleResponse = response => {
     if (response.config && response.config.progress) {
         dispatch({ type: 'DECREMENT_PENDING_REQUESTS' })
+    }
+
+    if (counter() === 0) {
         dispatch({ type: 'END_LOADING' })
     }
 
@@ -35,6 +44,9 @@ const handleResponse = response => {
 const handleError = error => {
     if (error.config && error.config.progress) {
         dispatch({ type: 'DECREMENT_PENDING_REQUESTS' })
+    }
+
+    if (counter() === 0) {
         dispatch({ type: 'END_LOADING' })
     }
 
