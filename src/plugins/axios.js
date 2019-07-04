@@ -24,15 +24,8 @@ instance.interceptors.request.use(config => {
 })
 
 const handleResponse = response => {
-    const { pendingRequests } = store
-        .getState()
-        .theme
-
     if (response.config && response.config.progress) {
         dispatch({ type: 'DECREMENT_PENDING_REQUESTS' })
-    }
-
-    if (pendingRequests === 0) {
         dispatch({ type: 'END_LOADING' })
     }
 
@@ -40,15 +33,8 @@ const handleResponse = response => {
 }
 
 const handleError = error => {
-    const { pendingRequests } = store
-        .getState()
-        .theme
-
     if (error.config && error.config.progress) {
         dispatch({ type: 'DECREMENT_PENDING_REQUESTS' })
-    }
-
-    if (pendingRequests === 0) {
         dispatch({ type: 'END_LOADING' })
     }
 
