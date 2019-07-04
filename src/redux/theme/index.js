@@ -9,7 +9,8 @@ import {
 
 const state = {
     loading: false,
-    pendingRequests: 0
+    pendingRequests: 0,
+    selects: []
 }
 
 const mutations = {
@@ -37,10 +38,10 @@ const mutations = {
             pendingRequests: state.pendingRequests - 1
         }
     },
-    [SELECT](state, { items }) {
+    [SELECT](state, { selects }) {
         return {
             ...state,
-            selection: items
+            selects
         }
     }
 }

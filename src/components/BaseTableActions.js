@@ -42,8 +42,8 @@ class BaseTableActions extends Component {
     }
 
     isEmpty = () => {
-        const { selection } = this.props
-        return !selection.length
+        const { selects } = this.props
+        return !selects.length
     }
 
     render() {
@@ -100,7 +100,7 @@ class BaseTableActions extends Component {
 }
 
 const mapStateToProps = state => ({
-    selection: state.theme.selection
+    selects: state.theme.selects
 })
 
 const component = withStyles(styles)(BaseTableActions)

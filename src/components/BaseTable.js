@@ -121,7 +121,7 @@ class BaseTable extends Component {
 
         this.props.dispatch({
             type: 'SELECT',
-            items: selectedRowsData
+            selects: selectedRowsData
         })
     }
 

@@ -58,21 +58,21 @@ class BaseDialogDelete extends Component {
 
         const {
             path,
-            selection,
+            selects,
             onClose,
             onDelete
         } = this.props
 
         try {
             await axios.post(path, {
-                ids: selection.map(({ _id }) => _id)
+                ids: selects.map(({ _id }) => _id)
             })
 
             onClose()
 
             this.props.dispatch({
-                type: 'SELECt',
-                items: []
+                type: 'SELECT',
+                selects: []
             })
 
             this.setState({
@@ -142,7 +142,7 @@ class BaseDialogDelete extends Component {
 }
 
 const mapStateToProps = state => ({
-    selection: state.theme.selection
+    selects: state.theme.selects
 })
 
 const component = withStyles(styles)(BaseDialogDelete)
