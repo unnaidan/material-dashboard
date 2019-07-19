@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-export default (props) => {
-    const { value } = props
-    
-    return (
-        <span>
-            {value}
-        </span>
-    )
+export default class FormatCurrency extends Component {
+    render() {
+        const { value } = this.props
+
+        return (
+            <span>
+                {value && value.toLocaleString('mn-MN')}
+            </span>
+        )
+    }
 }

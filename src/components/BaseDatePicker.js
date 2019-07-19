@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
-import { withStyles } from '@material-ui/styles'
-import MomentUtils from '@date-io/moment'
+import DateFnsUtils from '@date-io/date-fns'
 import {
     MuiPickersUtilsProvider,
     DatePicker
 } from '@material-ui/pickers'
 
-const styles = theme => ({
-    //
-})
-
-class BaseDatePicker extends Component {
+export default class BaseDatePicker extends Component {
     constructor(props) {
         super(props)
 
@@ -27,14 +22,14 @@ class BaseDatePicker extends Component {
         } = this.props
 
         return (
-            <MuiPickersUtilsProvider utils={MomentUtils}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <DatePicker
                     value={value}
                     onChange={onChange}
                     label={label}
-                    format="YYYY-MM-DD"
+                    format="yyyy-MM-dd"
                     inputVariant="outlined"
-                    margin="normal"
+                    margin="none"
                     fullWidth
                     clearable
                 />
@@ -42,5 +37,3 @@ class BaseDatePicker extends Component {
         )
     }
 }
-
-export default withStyles(styles)(BaseDatePicker)

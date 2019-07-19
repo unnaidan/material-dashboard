@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Editor } from '@tinymce/tinymce-react'
 
-export default class BaseDatePicker extends Component {
+export default class BaseEditor extends Component {
     render() {
         const {
             value,

@@ -1,4 +1,5 @@
 import BaseDatePicker from './BaseDatePicker'
+import BaseEditor from './BaseEditor'
 import BasePasswordField from './BasePasswordField'
 import BaseSnackbar from './BaseSnackbar'
 import BaseTable from './BaseTable'
@@ -14,6 +15,7 @@ import MainDrawer from './MainDrawer'
 
 export {
     BaseDatePicker,
+    BaseEditor,
     BasePasswordField,
     BaseSnackbar,
     BaseTable,
