@@ -1,60 +1,13 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { withStyles } from '@material-ui/styles'
 import {
     Box,
-    Grid,
-    Button,
-    IconButton
+    Grid
 } from '@material-ui/core'
-import {
-    Plus,
-    Delete as DeleteIcon
-} from 'mdi-material-ui'
-import Delete from './Delete'
 
-const styles = theme => ({
-    plusIcon: {
-        marginRight: theme.spacing(1)
-    }
-})
 
-class BaseTableActions extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            open: false
-        }
-    }
-
-    open = () => {
-        this.setState({
-            open: true
-        })
-    }
-
-    close = () => {
-        this.setState({
-            open: false
-        })
-    }
-
-    isEmpty = () => {
-        const { selects } = this.props
-        return !selects.length
-    }
-
+export default class BaseTableActions extends Component {
     render() {
-        const { open } = this.state
-        const {
-            newPath,
-            deletePath,
-            onDelete,
-            classes
-        } = this.props
-        const { plusIcon } = classes
+        const { children } = this.props
 
         return (
             <div>
@@ -64,45 +17,10 @@ class BaseTableActions extends Component {
                         spacing={2}
                         container
                     >
-                        <Grid item>
-                            <Button
-                                color="primary"
-                                variant="contained"
-                                component={Link}
-                                to={newPath}
-                            >
-                                <Plus className={plusIcon} />
-                                Шинэ
-                            </Button>
-                        </Grid>
-                        <Grid item>
-                            <IconButton
-                                color="secondary"
-                                children={<DeleteIcon />}
-                                onClick={this.open}
-                                disabled={this.isEmpty()}
-                                style={{
-                                    padding: 6
-                                }}
-                            />
-                        </Grid>
+                        {children}
                     </Grid>
                 </Box>
-                <Delete
-                    open={open}
-                    onClose={this.close}
-                    path={deletePath}
-                    onDelete={onDelete}
-                />
             </div>
         )
     }
 }
-
-const mapStateToProps = state => ({
-    selects: state.theme.selects
-})
-
-const component = withStyles(styles)(BaseTableActions)
-
-export default connect(mapStateToProps)(component)

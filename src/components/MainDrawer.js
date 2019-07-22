@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { withStyles } from '@material-ui/styles'
 import {
-    Avatar,
     Button,
     Drawer,
     Hidden,
+    Avatar,
     List,
     ListItem,
     ListItemIcon,
@@ -29,14 +29,14 @@ const styles = theme => ({
         }
     },
     avatar: {
-        width: 60,
-        height: 60,
+        width: 80,
+        height: 'auto',
         marginLeft: 'auto',
         marginRight: 'auto',
         borderRadius: 0
     },
     button: {
-        marginTop: theme.spacing(2),
+        marginTop: theme.spacing(3),
         marginBottom: theme.spacing(1),
         borderColor: 'rgba(255, 255, 255, 0.23)',
         color: '#fff'
@@ -171,12 +171,12 @@ class MainDrawer extends Component {
                         </ListItem>
                     )}
                 </List>
-            </div>
+            </div >
         )
 
         return (
             <div>
-                <Hidden xsDown implementation="css">
+                <Hidden smDown implementation="css">
                     <Drawer
                         variant="persistent"
                         anchor="left"
@@ -190,7 +190,7 @@ class MainDrawer extends Component {
                         {drawerContent}
                     </Drawer>
                 </Hidden>
-                <Hidden smUp implementation="css">
+                <Hidden mdUp implementation="css">
                     <Drawer
                         variant="temporary"
                         anchor="left"
@@ -209,6 +209,10 @@ class MainDrawer extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    user: state.auth.user
+})
+
 const mapDispatchToProps = {
     removeAuth
 }
@@ -216,6 +220,6 @@ const mapDispatchToProps = {
 const component = withStyles(styles)(MainDrawer)
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(component)

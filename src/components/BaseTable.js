@@ -26,8 +26,11 @@ import {
     PagingPanel
 } from '@devexpress/dx-react-grid-material-ui'
 import axios from './../plugins/axios'
-import FormatCurrency from './FormatCurrency'
-import FormatDate from './FormatDate'
+import {
+    FormatCurrency,
+    FormatDate
+} from './../components'
+import { debounced } from './../utils/helpers'
 
 const styles = theme => ({
     paper: {
@@ -59,12 +62,6 @@ const tableMessages = {
     noData: 'Дата байхгүй'
 }
 
-const BooleanFormatter = ({ value }) => (
-    <span>
-        {value ? 'Тийм' : 'Үгүй'}
-    </span>
-)
-
 const DateTypeProvider = props => (
     <DataTypeProvider
         formatterComponent={FormatDate}
@@ -79,17 +76,9 @@ const CurrencyTypeProvider = props => (
     />
 )
 
-const BooleanTypeProvider = props => (
-    <DataTypeProvider
-        formatterComponent={BooleanFormatter}
-        {...props}
-    />
-)
-
 class BaseTable extends Component {
     static defaultProps = {
         dateColumns: [],
-        booleanColumns: [],
         currencyColumns: []
     }
 
@@ -97,31 +86,33 @@ class BaseTable extends Component {
         super(props)
 
         this.state = {
-            items: [],
-            selection: [],
             search: '',
-            fetching: false,
             sortBy: 'created',
             sortOrder: 'desc',
             page: 1,
             rowsPerPage: 30,
-            total: 0
+            total: 0,
+            fetching: false
         }
     }
 
     componentDidMount() {
         this.fetchData()
+        this.select()
     }
 
-    select = selection => {
-        const { items } = this.state
-        const selectedRowsData = items.filter((item, i) => selection.indexOf(i) !== -1)
+    componentWillUnmount() {
+        this.select()
+        this.props.dispatch({
+            type: 'SET_ITEMS',
+            items: []
+        })
+    }
 
-        this.setState({ selection })
-
+    select = (selects = []) => {
         this.props.dispatch({
             type: 'SELECT',
-            selects: selectedRowsData
+            selects
         })
     }
 
@@ -129,7 +120,7 @@ class BaseTable extends Component {
         this.setState({
             search: e.target.value
         }, () => {
-            this.fetchData()
+            debounced(this.fetchData)
         })
     }
 
@@ -161,31 +152,42 @@ class BaseTable extends Component {
         })
 
         const {
+            search,
             sortBy,
             sortOrder,
-            search,
             page,
             rowsPerPage
         } = this.state
-        const { path } = this.props
+        const {
+            path,
+            customParams = {}
+        } = this.props
+
+        let params = {
+            sortBy,
+            sortOrder,
+            search,
+            page: page,
+            rowsPerPage
+        }
+
+        params = {
+            ...params, ...customParams
+        }
 
         try {
             const {
                 total,
                 currentPage,
                 data
-            } = await axios.get(path, {
-                params: {
-                    sortBy,
-                    sortOrder,
-                    search,
-                    page: page,
-                    rowsPerPage
-                }
+            } = await axios.get(path, { params })
+
+            this.props.dispatch({
+                type: 'SET_ITEMS',
+                items: data
             })
 
             this.setState({
-                items: data,
                 fetching: false,
                 page: currentPage,
                 total
@@ -197,8 +199,6 @@ class BaseTable extends Component {
 
     render() {
         const {
-            items,
-            selection,
             search,
             fetching,
             sortBy,
@@ -210,8 +210,9 @@ class BaseTable extends Component {
         const {
             columns,
             dateColumns,
-            booleanColumns,
             currencyColumns,
+            items,
+            selects,
             classes
         } = this.props
         const {
@@ -264,7 +265,7 @@ class BaseTable extends Component {
                     value={search}
                     onChange={this.handleSearch}
                     type="search"
-                    placeholder="Хайх утга оруулна уу"
+                    placeholder="Хайх"
                     fullWidth
                 />
             </div>
@@ -294,7 +295,7 @@ class BaseTable extends Component {
                     />
                     <CustomPaging totalCount={total} />
                     <SelectionState
-                        selection={selection}
+                        selection={selects}
                         onSelectionChange={this.select}
                     />
                     <IntegratedSelection />
@@ -304,9 +305,6 @@ class BaseTable extends Component {
                     />
                     <CurrencyTypeProvider
                         for={currencyColumns}
-                    />
-                    <BooleanTypeProvider
-                        for={booleanColumns}
                     />
                     <Table
                         messages={tableMessages}
@@ -324,9 +322,16 @@ class BaseTable extends Component {
     }
 }
 
-const component = withStyles(styles)(BaseTable)
+const mapStateToProps = state => {
+    const {
+        items,
+        selects
+    } = state.theme
 
-export default connect(
-    null,
-    null
-)(component)
+    return {
+        items,
+        selects
+    }
+}
+
+export default connect(mapStateToProps)(withStyles(styles)(BaseTable))

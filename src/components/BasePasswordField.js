@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { withStyles } from '@material-ui/styles'
 import {
     IconButton,
     InputAdornment,
@@ -10,11 +9,7 @@ import {
     EyeOff
 } from 'mdi-material-ui'
 
-const styles = theme => ({
-    //
-})
-
-class BasePasswordField extends Component {
+export default class BasePasswordField extends Component {
     constructor(props) {
         super(props)
 
@@ -64,5 +59,3 @@ class BasePasswordField extends Component {
         )
     }
 }
-
-export default withStyles(styles)(BasePasswordField)

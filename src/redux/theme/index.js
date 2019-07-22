@@ -4,12 +4,14 @@ import {
     END_LOADING,
     INCREMENT_PENDING_REQUESTS,
     DECREMENT_PENDING_REQUESTS,
+    SET_ITEMS,
     SELECT
 } from './actionTypes'
 
 const state = {
     loading: false,
     pendingRequests: 0,
+    items: [],
     selects: []
 }
 
@@ -36,6 +38,12 @@ const mutations = {
         return {
             ...state,
             pendingRequests: state.pendingRequests - 1
+        }
+    },
+    [SET_ITEMS](state, { items }) {
+        return {
+            ...state,
+            items
         }
     },
     [SELECT](state, { selects }) {

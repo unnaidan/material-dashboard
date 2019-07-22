@@ -104,6 +104,4 @@ const mapStateToProps = state => ({
     user: state.auth.user
 })
 
-const component = withStyles(styles)(Dashboard)
-
-export default connect(mapStateToProps)(component)
+export default connect(mapStateToProps)(withStyles(styles)(Dashboard))

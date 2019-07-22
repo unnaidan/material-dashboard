@@ -72,6 +72,4 @@ const mapStateToProps = state => ({
     open: state.theme.loading
 })
 
-const component = withStyles(styles)(MainDialogLoader)
-
-export default connect(mapStateToProps)(component)
+export default connect(mapStateToProps)(withStyles(styles)(MainDialogLoader))

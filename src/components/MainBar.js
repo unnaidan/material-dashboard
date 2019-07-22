@@ -15,7 +15,8 @@ const drawerWidth = 260
 
 const styles = theme => ({
     appBar: {
-        boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)',
+        boxShadow: 'none',
+        borderBottom: '1px solid #e0e0e0',
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen
@@ -25,7 +26,7 @@ const styles = theme => ({
         minHeight: 56
     },
     appBarShift: {
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up('md')]: {
             width: `calc(100% - ${drawerWidth}px)`,
             marginLeft: drawerWidth
         },
@@ -74,7 +75,7 @@ class MainBar extends Component {
                 })}
             >
                 <Toolbar className={toolBar}>
-                    <Hidden xsDown implementation="css">
+                    <Hidden smDown implementation="css">
                         <IconButton
                             color="inherit"
                             aria-label="Open drawer"
@@ -84,7 +85,7 @@ class MainBar extends Component {
                             <MenuIcon />
                         </IconButton>
                     </Hidden>
-                    <Hidden smUp implementation="css">
+                    <Hidden mdUp implementation="css">
                         <IconButton
                             color="inherit"
                             aria-label="Open drawer"

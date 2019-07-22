@@ -1,61 +1,61 @@
 import React, { Component } from 'react'
-import { withStyles } from '@material-ui/styles'
+import { Grid } from '@material-ui/core'
 import { Dashboard } from './../layouts'
 import {
+    ActionDelete,
+    ActionNewButton,
+    ActionUpdateButton,
     BaseTable,
     BaseTableActions
 } from './../components'
+import { pathJoin } from './../utils/helpers'
 
-const styles = theme => ({
-    //
-})
+const columns = [
+    {
+        name: 'name',
+        title: 'Нэр'
+    },
+    {
+        name: 'email',
+        title: 'И-мэйл хаяг'
+    },
+    {
+        name: 'createdAt',
+        title: 'Бүртгүүлсэн'
+    },
+    {
+        getCellValue: ({ _id }) => <ActionUpdateButton path={pathJoin('users', _id)} />
+    }
+]
 
-class Users extends Component {
+const dateColumns = [
+    'createdAt', 'updatedAt'
+]
+
+export default class Users extends Component {
     constructor(props) {
         super(props)
-
         this.table = React.createRef()
-
-        this.state = {
-            title: 'Хэрэглэгч',
-            columns: [
-                {
-                    name: 'email',
-                    title: 'И-мэйл хаяг'
-                },
-                {
-                    name: 'createdAt',
-                    title: 'Үүсгэсэн'
-                },
-                {
-                    name: 'updatedAt',
-                    title: 'Шинэчилсэн'
-                }
-            ],
-            dateColumns: [
-                'createdAt', 'updatedAt'
-            ]
-        }
     }
 
-    onDelete = async () => {
-        await this.table.current.fetchData()
+    fetchData = () => {
+        return this.table.current.fetchData()
     }
 
     render() {
-        const {
-            title,
-            columns,
-            dateColumns
-        } = this.state
-
         return (
-            <Dashboard title={title}>
-                <BaseTableActions
-                    newPath="/users/new"
-                    deletePath="/users/mass/destroy"
-                    onDelete={this.onDelete}
-                />
+            <Dashboard title="Хэрэглэгч">
+                <BaseTableActions>
+                    <Grid item>
+                        <ActionNewButton path="/users/new" />
+                    </Grid>
+                    <Grid item>
+                        <ActionDelete
+                            path="/users/mass/destroy"
+                            onDelete={this.fetchData}
+                        />
+                    </Grid>
+                </BaseTableActions>
                 <BaseTable
                     path="users"
                     columns={columns}
@@ -66,5 +66,3 @@ class Users extends Component {
         )
     }
 }
-
-export default withStyles(styles)(Users)
